@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KidVerse — A Colorful Blog for Every Age</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --coral: #FF6B6B;
+  --sunshine: #FFD93D;
+  --sky: #6BCB77;
+  --ocean: #4D96FF;
+  --grape: #9B59B6;
+  --pink: #FF6BA3;
+  --mint: #1DD1A1;
+  --orange: #FF9F43;
+  --dark: #2D3436;
+  --light: #FFEAA7;
+  --white: #FFFFFF;
+  --bg-cream: #FFF9F0;
+  --shadow-fun: 6px 6px 0px rgba(0,0,0,0.15);
+  --shadow-hover: 8px 8px 0px rgba(0,0,0,0.2);
+  --radius-blob: 20px;
+  --radius-pill: 50px;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg-cream);
+  color: var(--dark);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Baloo 2', cursive;
+  line-height: 1.2;
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===== ANIMATED BACKGROUND BLOBS ===== */
+.bg-blobs {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none; overflow: hidden;
+}
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25;
+  animation: blobFloat 20s ease-in-out infinite alternate;
+}
+.blob-1 { width: 500px; height: 500px; background: var(--coral); top: -100px; left: -100px; animation-delay: 0s; }
+.blob-2 { width: 400px; height: 400px; background: var(--ocean); top: 50%; right: -80px; animation-delay: -5s; }
+.blob-3 { width: 350px; height: 350px; background: var(--sunshine); bottom: -50px; left: 30%; animation-delay: -10s; }
+.blob-4 { width: 300px; height: 300px; background: var(--grape); top: 20%; left: 50%; animation-delay: -15s; }
+
+@keyframes blobFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(50px, -30px) scale(1.1); }
+  66% { transform: translate(-30px, 50px) scale(0.95); }
+  100% { transform: translate(20px, -20px) scale(1.05); }
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 3px solid var(--sunshine);
+  padding: 0 2rem;
+  transition: box-shadow 0.3s;
+}
+.navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
+.logo {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.8rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--coral), var(--grape), var(--ocean));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.logo span { font-size: 1.4rem; }
+.nav-links { display: flex; gap: 0.3rem; align-items: center; }
+.nav-links a {
+  padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+  font-weight: 700; font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+  background: var(--sunshine);
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+.nav-links .dropdown { position: relative; }
+.nav-links .dropdown-btn {
+  cursor: pointer; padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700; font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: none; border: none; font-family: inherit; color: inherit;
+}
+.nav-links .dropdown-btn:hover { background: var(--sunshine); transform: translateY(-2px); }
+.dropdown-menu {
+  display: none; position: absolute; top: 110%; left: 50%; transform: translateX(-50%);
+  background: var(--white); border-radius: var(--radius-blob);
+  box-shadow: var(--shadow-fun); padding: 0.5rem; min-width: 180px;
+  border: 3px solid var(--sunshine);
+}
+.dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu a {
+  display: block; padding: 0.6rem 1rem; border-radius: 12px;
+  font-size: 0.85rem; white-space: nowrap;
+}
+.dropdown-menu a:hover { background: var(--light); }
+
+/* Mobile hamburger */
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  flex-direction: column; gap: 5px; padding: 5px;
+}
+.hamburger span {
+  display: block; width: 28px; height: 3px; background: var(--dark);
+  border-radius: 3px; transition: 0.3s;
+}
+
+/* ===== PAGE SECTIONS ===== */
+.page { display: none; min-height: 100vh; padding-top: 90px; }
+.page.active { display: block; animation: fadeIn 0.5s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+/* ===== HOME PAGE ===== */
+.hero {
+  text-align: center; padding: 4rem 2rem 3rem;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  background: linear-gradient(135deg, var(--coral), var(--grape), var(--ocean), var(--sky));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  animation: heroSlide 0.8s ease;
+}
+@keyframes heroSlide {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero p {
+  font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem;
+  color: #636e72;
+}
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 0.8rem 2rem;
+  border-radius: var(--radius-pill); font-weight: 800;
+  font-family: 'Baloo 2', cursive; font-size: 1.05rem;
+  border: 3px solid var(--dark);
+  box-shadow: var(--shadow-fun);
+  cursor: pointer; transition: all 0.2s;
+  text-align: center;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-hover);
+}
+.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.15); }
+.btn-coral { background: var(--coral); color: var(--white); }
+.btn-ocean { background: var(--ocean); color: var(--white); }
+.btn-sunshine { background: var(--sunshine); color: var(--dark); }
+.btn-grape { background: var(--grape); color: var(--white); }
+.btn-sky { background: var(--sky); color: var(--white); }
+.btn-pink { background: var(--pink); color: var(--white); }
+.btn-outline { background: transparent; color: var(--dark); }
+
+/* Age group cards on home */
+.age-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem; padding: 2rem 0 4rem;
+}
+.age-card {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark);
+  box-shadow: var(--shadow-fun);
+  padding: 2rem; text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+}
+.age-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+}
+.age-card.toddler::before { background: linear-gradient(90deg, var(--coral), var(--orange)); }
+.age-card.kids::before { background: linear-gradient(90deg, var(--ocean), var(--sky)); }
+.age-card.teens::before { background: linear-gradient(90deg, var(--grape), var(--pink)); }
+.age-card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: var(--shadow-hover);
+}
+.age-card .emoji { font-size: 3.5rem; margin-bottom: 0.5rem; }
+.age-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.age-card p { color: #636e72; font-size: 0.95rem; }
+
+/* Blog post preview grid */
+.section-title {
+  font-size: 2rem; text-align: center; margin: 3rem 0 1.5rem;
+  position: relative;
+}
+.section-title::after {
+  content: ''; display: block; width: 80px; height: 5px;
+  background: var(--sunshine); border-radius: 5px;
+  margin: 0.5rem auto 0;
+}
+.blog-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; padding: 1rem 0 4rem;
+}
+.blog-card {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+  overflow: hidden; transition: all 0.3s;
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+.blog-card-img {
+  height: 180px; display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+}
+.blog-card-img.c1 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+.blog-card-img.c2 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+.blog-card-img.c3 { background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+.blog-card-img.c4 { background: linear-gradient(135deg, #e0c3fc, #8ec5fc); }
+.blog-card-img.c5 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.blog-card-img.c6 { background: linear-gradient(135deg, #fccb90, #d57eeb); }
+.blog-card-body { padding: 1.5rem; }
+.blog-card-body .tag {
+  display: inline-block; padding: 0.2rem 0.8rem;
+  border-radius: var(--radius-pill); font-size: 0.75rem;
+  font-weight: 700; margin-bottom: 0.5rem;
+}
+.tag-toddler { background: #ffe0e0; color: var(--coral); }
+.tag-kids { background: #d6eaff; color: var(--ocean); }
+.tag-teens { background: #f0e0ff; color: var(--grape); }
+.blog-card-body h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+.blog-card-body p { font-size: 0.9rem; color: #636e72; }
+
+/* ===== ABOUT PAGE ===== */
+.about-hero {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  align-items: center; padding: 3rem 0;
+}
+.about-text h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.about-text h1 span {
+  background: linear-gradient(135deg, var(--coral), var(--grape));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.about-text p { margin-bottom: 1rem; color: #636e72; font-size: 1.05rem; }
+.about-illustration {
+  background: linear-gradient(135deg, var(--sunshine), var(--orange));
+  border-radius: var(--radius-blob); border: 3px solid var(--dark);
+  box-shadow: var(--shadow-fun);
+  height: 350px; display: flex; align-items: center; justify-content: center;
+  font-size: 8rem;
+}
+.values-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem; padding: 2rem 0 4rem;
+}
+.value-card {
+  background: var(--white); border-radius: var(--radius-blob);
+  padding: 1.5rem; text-align: center;
+  border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+  transition: all 0.3s;
+}
+.value-card:hover { transform: rotate(2deg) translateY(-5px); }
+.value-card .v-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.value-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+.value-card p { font-size: 0.85rem; color: #636e72; }
+
+/* ===== SERVICES/PROJECTS PAGE ===== */
+.services-hero { text-align: center; padding: 3rem 0 2rem; }
+.services-hero h1 { font-size: 2.5rem; }
+.services-hero h1 span {
+  background: linear-gradient(135deg, var(--ocean), var(--sky));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; padding: 2rem 0 4rem;
+}
+.service-card {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+  padding: 2rem; transition: all 0.3s;
+}
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+.service-card .s-icon {
+  width: 60px; height: 60px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; margin-bottom: 1rem;
+}
+.service-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.service-card p { font-size: 0.9rem; color: #636e72; }
+
+/* ===== AGE GROUP PAGES ===== */
+.age-hero {
+  text-align: center; padding: 3rem 2rem; border-radius: var(--radius-blob);
+  margin: 1rem 0 2rem; border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+}
+.age-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.age-hero p { font-size: 1.1rem; color: #636e72; max-width: 600px; margin: 0 auto; }
+.age-hero.toddler-hero { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+.age-hero.kids-hero { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+.age-hero.teens-hero { background: linear-gradient(135deg, #e0c3fc, #f5c6ec); }
+
+.age-content { padding-bottom: 4rem; }
+.age-content h2 { font-size: 1.6rem; margin: 2rem 0 1rem; }
+.activity-list {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem; margin: 1rem 0;
+}
+.activity-item {
+  background: var(--white); border-radius: 16px;
+  border: 2px solid var(--dark); padding: 1.2rem;
+  display: flex; align-items: flex-start; gap: 1rem;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+.activity-item:hover { transform: translateY(-3px); }
+.activity-item .a-emoji { font-size: 2rem; flex-shrink: 0; }
+.activity-item h4 { font-size: 1rem; }
+.activity-item p { font-size: 0.8rem; color: #636e72; }
+
+/* ===== CONTACT PAGE ===== */
+.contact-wrapper {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  padding: 3rem 0 4rem; align-items: start;
+}
+.contact-info h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.contact-info h1 span {
+  background: linear-gradient(135deg, var(--pink), var(--coral));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.contact-info p { color: #636e72; margin-bottom: 1.5rem; font-size: 1.05rem; }
+.contact-detail {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1rem; font-size: 1rem;
+}
+.contact-detail .cd-icon {
+  width: 45px; height: 45px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.contact-form {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+  padding: 2rem;
+}
+.form-group { margin-bottom: 1.2rem; }
+.form-group label {
+  display: block; font-weight: 700; margin-bottom: 0.3rem;
+  font-family: 'Baloo 2', cursive; font-size: 0.95rem;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 0.8rem 1rem;
+  border: 3px solid #ddd; border-radius: 14px;
+  font-family: 'Nunito', sans-serif; font-size: 0.95rem;
+  transition: border-color 0.3s;
+  background: var(--bg-cream);
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  outline: none; border-color: var(--ocean);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background: var(--dark); color: var(--white);
+  padding: 3rem 2rem 1.5rem; margin-top: 2rem;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem;
+}
+.footer-brand .logo-footer {
+  font-family: 'Baloo 2', cursive; font-size: 1.5rem; font-weight: 800;
+  color: var(--sunshine); margin-bottom: 0.5rem;
+}
+.footer-brand p { color: #b2bec3; font-size: 0.9rem; }
+.footer-col h4 {
+  font-family: 'Baloo 2', cursive; color: var(--sunshine);
+  margin-bottom: 0.8rem; font-size: 1.1rem;
+}
+.footer-col a {
+  display: block; color: #b2bec3; margin-bottom: 0.4rem;
+  font-size: 0.9rem; transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  max-width: 1100px; margin: 2rem auto 0;
+  padding-top: 1.5rem; border-top: 1px solid #636e72;
+  text-align: center; color: #b2bec3; font-size: 0.85rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links { 
+    display: none; position: fixed; top: 70px; left: 0; right: 0;
+    background: rgba(255,255,255,0.97); flex-direction: column;
+    padding: 1rem; gap: 0.3rem; border-bottom: 3px solid var(--sunshine);
+  }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .dropdown-menu {
+    position: static; transform: none; box-shadow: none;
+    border: none; padding-left: 1rem;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .about-hero { grid-template-columns: 1fr; }
+  .about-illustration { height: 220px; font-size: 5rem; }
+  .contact-wrapper { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.5rem; }
+}
+
+/* ===== MARQUEE ===== */
+.marquee-wrap {
+  overflow: hidden; background: var(--dark); padding: 0.7rem 0;
+  margin: 2rem 0;
+}
+.marquee-track {
+  display: flex; gap: 3rem; width: max-content;
+  animation: marquee 20s linear infinite;
+}
+.marquee-track span {
+  font-family: 'Baloo 2', cursive; font-size: 1.1rem;
+  color: var(--sunshine); white-space: nowrap; font-weight: 700;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== FUN NEWSLETTER STRIP ===== */
+.newsletter {
+  background: linear-gradient(135deg, var(--ocean), var(--grape));
+  border-radius: var(--radius-blob); border: 3px solid var(--dark);
+  box-shadow: var(--shadow-fun);
+  padding: 2.5rem; text-align: center; color: var(--white);
+  margin: 2rem 0 3rem;
+}
+.newsletter h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.newsletter p { margin-bottom: 1.2rem; opacity: 0.9; }
+.newsletter-form {
+  display: flex; gap: 0.8rem; max-width: 450px; margin: 0 auto;
+  flex-wrap: wrap; justify-content: center;
+}
+.newsletter-form input {
+  flex: 1; min-width: 200px; padding: 0.8rem 1.2rem;
+  border: 3px solid rgba(255,255,255,0.4); border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.15); color: var(--white);
+  font-family: 'Nunito', sans-serif; font-size: 1rem;
+}
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.6); }
+.newsletter-form input:focus { outline: none; border-color: var(--sunshine); }
+
+/* Scroll-reveal */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showPage('home')">🌈 KidVerse</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="active" data-page="home" onclick="showPage('home')">Home</a>
+      <a href="#" data-page="about" onclick="showPage('about')">About</a>
+      <a href="#" data-page="services" onclick="showPage('services')">Projects</a>
+      <div class="dropdown">
+        <button class="dropdown-btn">Age Groups ▾</button>
+        <div class="dropdown-menu">
+          <a href="#" data-page="toddlers" onclick="showPage('toddlers')">🧸 Toddlers (2-5)</a>
+          <a href="#" data-page="kids" onclick="showPage('kids')">🚀 Kids (6-10)</a>
+          <a href="#" data-page="teens" onclick="showPage('teens')">🎧 Teens (11-17)</a>
+        </div>
+      </div>
+      <a href="#" data-page="contact" onclick="showPage('contact')">Contact</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HOME PAGE ============ -->
+<div class="page active" id="page-home">
+  <div class="container">
+    <div class="hero">
+      <h1>Where Every Kid Discovers Something Awesome!</h1>
+      <p>KidVerse is a colorful blog packed with fun stories, activities, and learning for toddlers, kids, and teens. Dive in!</p>
+      <div class="hero-buttons">
+        <a class="btn btn-coral" onclick="showPage('toddlers')">🧸 Toddlers</a>
+        <a class="btn btn-ocean" onclick="showPage('kids')">🚀 Kids</a>
+        <a class="btn btn-grape" onclick="showPage('teens')">🎧 Teens</a>
+      </div>
+    </div>
+
+    <!-- Marquee -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <span>✨ New: Summer Art Challenge!</span>
+        <span>🎨 Craft of the Week: Paper Rockets</span>
+        <span>📚 Story Time: The Dragon Who Loved Pancakes</span>
+        <span>🧪 Science Saturday: Volcano Experiments</span>
+        <span>🎮 Game Review: Top 5 Puzzle Games for Kids</span>
+        <span>✨ New: Summer Art Challenge!</span>
+        <span>🎨 Craft of the Week: Paper Rockets</span>
+        <span>📚 Story Time: The Dragon Who Loved Pancakes</span>
+        <span>🧪 Science Saturday: Volcano Experiments</span>
+        <span>🎮 Game Review: Top 5 Puzzle Games for Kids</span>
+      </div>
+    </div>
+
+    <!-- Age group cards -->
+    <h2 class="section-title reveal">Pick Your Age Group</h2>
+    <div class="age-cards">
+      <div class="age-card toddler reveal" onclick="showPage('toddlers')">
+        <div class="emoji">🧸</div>
+        <h3>Toddlers (2-5)</h3>
+        <p>Bright colors, sing-along stories, and sensory play to spark little imaginations.</p>
+        <br><a class="btn btn-coral" style="font-size:0.9rem; padding:0.5rem 1.5rem;">Explore →</a>
+      </div>
+      <div class="age-card kids reveal" onclick="showPage('kids')">
+        <div class="emoji">🚀</div>
+        <h3>Kids (6-10)</h3>
+        <p>Science experiments, creative crafts, cool facts, and adventure stories!</p>
+        <br><a class="btn btn-ocean" style="font-size:0.9rem; padding:0.5rem 1.5rem;">Explore →</a>
+      </div>
+      <div class="age-card teens reveal" onclick="showPage('teens')">
+        <div class="emoji">🎧</div>
+        <h3>Teens (11-17)</h3>
+        <p>Tech tutorials, book reviews, creative writing prompts, and real-world skills.</p>
+        <br><a class="btn btn-grape" style="font-size:0.9rem; padding:0.5rem 1.5rem;">Explore →</a>
+      </div>
+    </div>
+
+    <!-- Latest posts -->
+    <h2 class="section-title reveal">Latest Blog Posts</h2>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-card-img c1">🎨</div>
+        <div class="blog-card-body">
+          <span class="tag tag-toddler">Toddlers</span>
+          <h3>5 Finger Painting Ideas That Are Surprisingly Clean</h3>
+          <p>Yes, it's possible! These mess-free painting tricks will keep your floors safe.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-card-img c2">🔬</div>
+        <div class="blog-card-body">
+          <span class="tag tag-kids">Kids</span>
+          <h3>Build Your Own Baking Soda Volcano</h3>
+          <p>The classic science experiment with a colorful twist your kids will love.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-card-img c3">🌱</div>
+        <div class="blog-card-body">
+          <span class="tag tag-kids">Kids</span>
+          <h3>Grow a Garden in a Jar</h3>
+          <p>Learn how to create your own mini ecosystem with things from around the house.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-card-img c4">💻</div>
+        <div class="blog-card-body">
+          <span class="tag tag-teens">Teens</span>
+          <h3>Your First Website in 30 Minutes</h3>
+          <p>A beginner-friendly guide to HTML & CSS that actually makes sense.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-card-img c5">📖</div>
+        <div class="blog-card-body">
+          <span class="tag tag-teens">Teens</span>
+          <h3>10 Books That Will Change How You Think</h3>
+          <p>From sci-fi to philosophy — these reads will expand your mind.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-card-img c6">🧁</div>
+        <div class="blog-card-body">
+          <span class="tag tag-toddler">Toddlers</span>
+          <h3>No-Bake Treats Toddlers Can Make Themselves</h3>
+          <p>Simple, safe, and delicious snacks for tiny chefs with big appetites.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter reveal">
+      <h2>🎉 Join the KidVerse Club!</h2>
+      <p>Get weekly activities, stories, and fun stuff delivered to your inbox.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address...">
+        <a class="btn btn-sunshine" onclick="alert('🎉 Thanks for subscribing! Welcome to KidVerse!')">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT PAGE ============ -->
+<div class="page" id="page-about">
+  <div class="container">
+    <div class="about-hero">
+      <div class="about-text">
+        <h1>About <span>KidVerse</span></h1>
+        <p>We believe every child deserves a colorful corner of the internet filled with creativity, learning, and laughter.</p>
+        <p>KidVerse was created by a team of parents, teachers, and kid-whisperers who wanted to build something better — a blog that speaks to kids at every stage, from first words to first code.</p>
+        <p>Our content is age-appropriate, screen-time-worthy (the good kind!), and designed to make kids say "whoa, that's cool!"</p>
+        <a class="btn btn-ocean" onclick="showPage('services')">See Our Projects →</a>
+      </div>
+      <div class="about-illustration">📚</div>
+    </div>
+
+    <h2 class="section-title reveal">Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="v-icon">🌈</div>
+        <h3>Inclusivity</h3>
+        <p>Content for every child, every background, every ability.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🔒</div>
+        <h3>Safety First</h3>
+        <p>No ads, no trackers, no creepy stuff. Ever.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🧠</div>
+        <h3>Learn by Doing</h3>
+        <p>Hands-on activities beat passive scrolling every time.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🎨</div>
+        <h3>Creativity</h3>
+        <p>We celebrate weird ideas, messy art, and bold imagination.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SERVICES/PROJECTS PAGE ============ -->
+<div class="page" id="page-services">
+  <div class="container">
+    <div class="services-hero">
+      <h1>Our <span>Projects & Programs</span></h1>
+      <p style="color:#636e72; max-width:600px; margin:0.5rem auto 0; font-size:1.05rem;">Here's what we're building to make the internet brighter for kids.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="s-icon" style="background:linear-gradient(135deg,var(--coral),var(--orange));">📝</div>
+        <h3>Weekly Blog Posts</h3>
+        <p>Fresh articles every week — crafts, science, stories, and life skills for every age group.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon" style="background:linear-gradient(135deg,var(--ocean),var(--mint));">🎥</div>
+        <h3>Video Tutorials</h3>
+        <p>Step-by-step video guides for crafts, coding, cooking, and creative projects.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon" style="background:linear-gradient(135deg,var(--grape),var(--pink));">📦</div>
+        <h3>Activity Kits</h3>
+        <p>Downloadable printable kits with everything kids need for a full afternoon of fun.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon" style="background:linear-gradient(135deg,var(--sunshine),var(--sky));">🏕️</div>
+        <h3>Summer Camp Online</h3>
+        <p>A free virtual summer camp with daily challenges, live sessions, and prizes!</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon" style="background:linear-gradient(135deg,var(--mint),var(--ocean));">🤝</div>
+        <h3>Parent Resources</h3>
+        <p>Guides and tips for parents on screen time, learning milestones, and creative play.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="s-icon" style="background:linear-gradient(135deg,var(--pink),var(--coral));">🌍</div>
+        <h3>Community Challenges</h3>
+        <p>Monthly creative challenges where kids submit art, stories, and projects to be featured.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TODDLERS PAGE ============ -->
+<div class="page" id="page-toddlers">
+  <div class="container">
+    <div class="age-hero toddler-hero">
+      <h1>🧸 Toddlers (Ages 2-5)</h1>
+      <p>A bright, gentle world of colors, songs, and sensory fun for the littlest learners.</p>
+    </div>
+    <div class="age-content">
+      <h2 class="section-title reveal">Featured Activities</h2>
+      <div class="activity-list">
+        <div class="activity-item reveal">
+          <div class="a-emoji">🎨</div>
+          <div><h4>Rainbow Finger Painting</h4><p>Mess-free finger painting with ziplock bags and paint.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🎵</div>
+          <div><h4>Sing-Along Saturdays</h4><p>Fun songs with hand motions to build coordination.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🧩</div>
+          <div><h4>Shape Sorting Games</h4><p>Printable shape sorters to practice colors and forms.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🌿</div>
+          <div><h4>Nature Walk Bingo</h4><p>Take the card outside and spot leaves, bugs, and clouds!</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">📖</div>
+          <div><h4>Bedtime Story Corner</h4><p>Short, illustrated stories for winding down at night.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🧁</div>
+          <div><h4>Tiny Chef Kitchen</h4><p>No-bake snacks tiny hands can make with a little help.</p></div>
+        </div>
+      </div>
+
+      <h2 class="section-title reveal">Latest Toddler Posts</h2>
+      <div class="blog-grid">
+        <div class="blog-card reveal">
+          <div class="blog-card-img c1">🧸</div>
+          <div class="blog-card-body">
+            <span class="tag tag-toddler">Sensory Play</span>
+            <h3>DIY Sensory Bins for Rainy Days</h3>
+            <p>Rice, beans, and imagination — that's all you need!</p>
+          </div>
+        </div>
+        <div class="blog-card reveal">
+          <div class="blog-card-img c6">🎭</div>
+          <div class="blog-card-body">
+            <span class="tag tag-toddler">Creative Play</span>
+            <h3>Puppet Show in a Box</h3>
+            <p>Make sock puppets and put on a show for the family.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ KIDS PAGE ============ -->
+<div class="page" id="page-kids">
+  <div class="container">
+    <div class="age-hero kids-hero">
+      <h1>🚀 Kids (Ages 6-10)</h1>
+      <p>Experiments, adventures, and cool projects for curious minds who love to explore.</p>
+    </div>
+    <div class="age-content">
+      <h2 class="section-title reveal">Featured Activities</h2>
+      <div class="activity-list">
+        <div class="activity-item reveal">
+          <div class="a-emoji">🔬</div>
+          <div><h4>Kitchen Science Lab</h4><p>Experiments using stuff already in your kitchen.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🚀</div>
+          <div><h4>Build a Paper Rocket</h4><p>Design, fold, and launch — see whose goes highest!</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🗺️</div>
+          <div><h4>Treasure Map Creator</h4><p>Draw a pirate map of your backyard and hide treasures.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🤖</div>
+          <div><h4>Intro to Scratch Coding</h4><p>Make your first animation with drag-and-drop coding.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🌋</div>
+          <div><h4>Volcano Eruption</h4><p>The classic baking soda experiment, now with color!</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">📓</div>
+          <div><h4>Adventure Journal</h4><p>A printable journal to log discoveries and drawings.</p></div>
+        </div>
+      </div>
+
+      <h2 class="section-title reveal">Latest Kids Posts</h2>
+      <div class="blog-grid">
+        <div class="blog-card reveal">
+          <div class="blog-card-img c2">🌍</div>
+          <div class="blog-card-body">
+            <span class="tag tag-kids">Explore</span>
+            <h3>7 Amazing Animal Facts You Won't Believe</h3>
+            <p>Did you know octopuses have three hearts? Mind. Blown.</p>
+          </div>
+        </div>
+        <div class="blog-card reveal">
+          <div class="blog-card-img c3">🏗️</div>
+          <div class="blog-card-body">
+            <span class="tag tag-kids">Build</span>
+            <h3>Make a Bridge Out of Spaghetti</h3>
+            <p>Engineering challenge: how much weight can yours hold?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TEENS PAGE ============ -->
+<div class="page" id="page-teens">
+  <div class="container">
+    <div class="age-hero teens-hero">
+      <h1>🎧 Teens (Ages 11-17)</h1>
+      <p>Level up your skills with coding, creativity, and content that actually matters.</p>
+    </div>
+    <div class="age-content">
+      <h2 class="section-title reveal">Featured Activities</h2>
+      <div class="activity-list">
+        <div class="activity-item reveal">
+          <div class="a-emoji">💻</div>
+          <div><h4>Build Your First Website</h4><p>HTML, CSS, and hosting — from zero to live in an hour.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🎬</div>
+          <div><h4>Short Film Challenge</h4><p>Write, shoot, and edit a 2-minute film with your phone.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">📝</div>
+          <div><h4>Creative Writing Prompts</h4><p>Weekly prompts to spark your next story or poem.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🎸</div>
+          <div><h4>Learn an Instrument Online</h4><p>Free resources to start guitar, piano, or ukulele.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">💰</div>
+          <div><h4>Money Skills 101</h4><p>Budgeting, saving, and understanding how money works.</p></div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="a-emoji">🧘</div>
+          <div><h4>Mindfulness & Journaling</h4><p>Simple practices for managing stress and staying grounded.</p></div>
+        </div>
+      </div>
+
+      <h2 class="section-title reveal">Latest Teen Posts</h2>
+      <div class="blog-grid">
+        <div class="blog-card reveal">
+          <div class="blog-card-img c4">🎮</div>
+          <div class="blog-card-body">
+            <span class="tag tag-teens">Tech</span>
+            <h3>Best Free Apps for Learning to Code</h3>
+            <p>From Scratch to Python — apps that make coding fun.</p>
+          </div>
+        </div>
+        <div class="blog-card reveal">
+          <div class="blog-card-img c5">✍️</div>
+          <div class="blog-card-body">
+            <span class="tag tag-teens">Create</span>
+            <h3>How to Start a Blog (Like This One!)</h3>
+            <p>A teen-friendly guide to launching your own creative space online.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTACT PAGE ============ -->
+<div class="page" id="page-contact">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h1>Say <span>Hello!</span></h1>
+        <p>Have a cool idea for a blog post? Want to collaborate? Or just want to say hi? We'd love to hear from you!</p>
+        <div class="contact-detail">
+          <div class="cd-icon" style="background: linear-gradient(135deg, var(--coral), var(--orange));">📧</div>
+          <span>hello@kidverse.blog</span>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon" style="background: linear-gradient(135deg, var(--ocean), var(--sky));">📍</div>
+          <span>The Internet (we're everywhere!)</span>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon" style="background: linear-gradient(135deg, var(--grape), var(--pink));">⏰</div>
+          <span>We reply within 24 hours</span>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your Name 🙋</label>
+          <input type="text" placeholder="What should we call you?">
+        </div>
+        <div class="form-group">
+          <label>Email 📧</label>
+          <input type="email" placeholder="your.email@example.com">
+        </div>
+        <div class="form-group">
+          <label>I am a... 🎭</label>
+          <select>
+            <option>-- Pick one --</option>
+            <option>Kid</option>
+            <option>Teen</option>
+            <option>Parent / Guardian</option>
+            <option>Teacher / Educator</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message 💬</label>
+          <textarea placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <a class="btn btn-pink" style="width:100%; text-align:center;" onclick="alert('🎉 Message sent! We\'ll get back to you soon.')">Send Message 🚀</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-footer">🌈 KidVerse</div>
+      <p>A colorful blog where every kid discovers something awesome. Made with love for curious minds everywhere.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('about')">About Us</a>
+      <a href="#" onclick="showPage('services')">Projects</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Age Groups</h4>
+      <a href="#" onclick="showPage('toddlers')">🧸 Toddlers (2-5)</a>
+      <a href="#" onclick="showPage('kids')">🚀 Kids (6-10)</a>
+      <a href="#" onclick="showPage('teens')">🎧 Teens (11-17)</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 KidVerse. Made with ❤️ for kids everywhere. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// ===== PAGE NAVIGATION =====
+function showPage(pageName) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('page-' + pageName);
+  if (target) target.classList.add('active');
+  // Update nav active state
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-page') === pageName);
+  });
+  // Close mobile menu
+  document.getElementById('navLinks').classList.remove('open');
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Re-trigger reveal animations
+  setTimeout(initReveal, 100);
+}
+
+// ===== MOBILE MENU =====
+function toggleMobile() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ===== NAVBAR SCROLL EFFECT =====
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ===== SCROLL REVEAL =====
+function initReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => {
+    el.classList.remove('visible');
+    observer.observe(el);
+  });
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', initReveal);
+</script>
+</body>
+</html>
