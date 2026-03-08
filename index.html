@@ -1345,15 +1345,22 @@ let currentUser = null;
 
 // Initialize Supabase (only if configured)
 function initSupabase() {
-  // Dynamically load Supabase SDK
+  // Dynamically load Supabase SDK (UMD browser bundle)
   const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
   script.onload = function() {
-    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && typeof window.supabase !== 'undefined') {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      checkAuthState();
+    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+      // The UMD bundle exposes window.supabase
+      const createClient = window.supabase?.createClient;
+      if (createClient) {
+        supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log('Supabase: connected successfully!');
+        checkAuthState();
+      } else {
+        console.log('Supabase: SDK loaded but createClient not found.');
+      }
     } else {
-      console.log('Supabase: using demo mode (not configured or SDK not loaded).');
+      console.log('Supabase: using demo mode (not configured).');
     }
   };
   script.onerror = function() {
