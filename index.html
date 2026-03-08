@@ -487,6 +487,236 @@ img { max-width: 100%; display: block; }
 .newsletter-form input::placeholder { color: rgba(255,255,255,0.6); }
 .newsletter-form input:focus { outline: none; border-color: var(--sunshine); }
 
+/* ===== AUTH PAGES ===== */
+.auth-wrapper {
+  display: flex; align-items: center; justify-content: center;
+  min-height: calc(100vh - 90px); padding: 2rem;
+}
+.auth-card {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+  width: 100%; max-width: 440px; padding: 2.5rem;
+  animation: fadeIn 0.5s ease;
+}
+.auth-card .auth-emoji { font-size: 3rem; text-align: center; margin-bottom: 0.5rem; }
+.auth-card h1 {
+  font-size: 1.8rem; text-align: center; margin-bottom: 0.3rem;
+}
+.auth-card .auth-sub { text-align: center; color: #636e72; margin-bottom: 1.5rem; font-size: 0.95rem; }
+.auth-card .form-group { margin-bottom: 1rem; }
+.auth-card .form-group label {
+  display: block; font-weight: 700; margin-bottom: 0.3rem;
+  font-family: 'Baloo 2', cursive; font-size: 0.9rem;
+}
+.auth-card .form-group input,
+.auth-card .form-group select {
+  width: 100%; padding: 0.75rem 1rem;
+  border: 3px solid #ddd; border-radius: 14px;
+  font-family: 'Nunito', sans-serif; font-size: 0.95rem;
+  transition: border-color 0.3s; background: var(--bg-cream);
+}
+.auth-card .form-group input:focus,
+.auth-card .form-group select:focus {
+  outline: none; border-color: var(--ocean);
+}
+.auth-card .auth-btn {
+  width: 100%; padding: 0.85rem; border: 3px solid var(--dark);
+  border-radius: var(--radius-pill); font-family: 'Baloo 2', cursive;
+  font-size: 1.05rem; font-weight: 800; cursor: pointer;
+  box-shadow: var(--shadow-fun); transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+.auth-card .auth-btn:hover {
+  transform: translate(-2px, -2px); box-shadow: var(--shadow-hover);
+}
+.auth-card .auth-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.15); }
+.auth-card .auth-btn.btn-primary { background: var(--ocean); color: var(--white); }
+.auth-card .auth-btn.btn-signup { background: var(--sky); color: var(--white); }
+.auth-card .auth-switch {
+  text-align: center; margin-top: 1.2rem; font-size: 0.9rem; color: #636e72;
+}
+.auth-card .auth-switch a {
+  color: var(--ocean); font-weight: 700; cursor: pointer;
+}
+.auth-card .auth-switch a:hover { text-decoration: underline; }
+.auth-error {
+  background: #ffe0e0; border: 2px solid var(--coral); color: var(--coral);
+  border-radius: 12px; padding: 0.6rem 1rem; margin-bottom: 1rem;
+  font-size: 0.85rem; font-weight: 600; display: none; text-align: center;
+}
+.auth-success {
+  background: #e0ffe0; border: 2px solid var(--sky); color: #2d8a4e;
+  border-radius: 12px; padding: 0.6rem 1rem; margin-bottom: 1rem;
+  font-size: 0.85rem; font-weight: 600; display: none; text-align: center;
+}
+.auth-tabs {
+  display: flex; gap: 0; margin-bottom: 1.5rem;
+  border: 3px solid var(--dark); border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.auth-tab {
+  flex: 1; padding: 0.6rem; text-align: center; font-family: 'Baloo 2', cursive;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  background: var(--bg-cream); color: var(--dark);
+  border: none; transition: all 0.3s;
+}
+.auth-tab.active { background: var(--ocean); color: var(--white); }
+.auth-tab:first-child { border-right: 3px solid var(--dark); }
+.auth-form-section { display: none; }
+.auth-form-section.active { display: block; }
+
+/* Profile page */
+.profile-wrapper {
+  max-width: 600px; margin: 0 auto; padding: 2rem;
+}
+.profile-card {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark); box-shadow: var(--shadow-fun);
+  padding: 2.5rem; text-align: center;
+}
+.profile-avatar {
+  width: 100px; height: 100px; border-radius: 50%;
+  border: 4px solid var(--dark); margin: 0 auto 1rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+}
+.profile-avatar.parent-avatar { background: linear-gradient(135deg, var(--ocean), var(--sky)); }
+.profile-avatar.kid-avatar { background: linear-gradient(135deg, var(--coral), var(--sunshine)); }
+.profile-card h2 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+.profile-card .profile-role {
+  display: inline-block; padding: 0.2rem 0.8rem; border-radius: var(--radius-pill);
+  font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem;
+}
+.profile-role.role-parent { background: #d6eaff; color: var(--ocean); }
+.profile-role.role-kid { background: #ffe0e0; color: var(--coral); }
+.profile-card .profile-email { color: #636e72; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.profile-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.profile-stat {
+  background: var(--bg-cream); border-radius: 14px; padding: 1rem;
+  border: 2px solid var(--border, #e0e6ed);
+}
+.profile-stat .stat-num { font-family: 'Baloo 2', cursive; font-size: 1.8rem; font-weight: 800; color: var(--ocean); }
+.profile-stat .stat-label { font-size: 0.75rem; color: #636e72; font-weight: 700; }
+.profile-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* Nav auth button */
+.nav-auth-btn {
+  padding: 0.45rem 1.2rem; border-radius: var(--radius-pill);
+  font-weight: 800; font-size: 0.85rem; cursor: pointer;
+  border: 2px solid var(--dark); transition: all 0.3s;
+  font-family: 'Baloo 2', cursive;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+.nav-auth-btn:hover { transform: translateY(-2px); box-shadow: 4px 4px 0 rgba(0,0,0,0.15); }
+.nav-auth-btn.login-btn { background: var(--ocean); color: var(--white); }
+.nav-auth-btn.profile-btn { background: var(--sunshine); color: var(--dark); }
+.nav-auth-area { display: flex; align-items: center; gap: 0.5rem; }
+
+/* ===== ACTIVITY MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 2000;
+  align-items: center; justify-content: center;
+  padding: 1.5rem;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.modal-overlay.open { display: flex; animation: modalFadeIn 0.3s ease; }
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal {
+  background: var(--white); border-radius: var(--radius-blob);
+  border: 3px solid var(--dark); box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
+  width: 100%; max-width: 700px; max-height: 85vh;
+  overflow-y: auto; position: relative;
+  animation: modalSlideUp 0.3s ease;
+}
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-close {
+  position: sticky; top: 0; right: 0; z-index: 10;
+  display: flex; justify-content: flex-end; padding: 1rem 1.2rem 0;
+}
+.modal-close button {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 3px solid var(--dark); background: var(--white);
+  font-size: 1.2rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+.modal-close button:hover {
+  background: var(--coral); color: var(--white);
+  transform: rotate(90deg);
+}
+.modal-banner {
+  height: 160px; display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; margin: 0 1.5rem; border-radius: 16px;
+}
+.modal-banner.toddler-bg { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+.modal-banner.kids-bg { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+.modal-banner.teens-bg { background: linear-gradient(135deg, #e0c3fc, #f5c6ec); }
+.modal-body { padding: 1.5rem 2rem 2rem; }
+.modal-body .modal-tag {
+  display: inline-block; padding: 0.25rem 0.9rem;
+  border-radius: var(--radius-pill); font-size: 0.75rem;
+  font-weight: 700; margin-bottom: 0.6rem;
+}
+.modal-body h2 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+.modal-body .modal-subtitle { color: #636e72; font-size: 0.95rem; margin-bottom: 1.2rem; }
+.modal-body h3 { font-size: 1.15rem; margin: 1.3rem 0 0.5rem; color: var(--dark); }
+.modal-body p { margin-bottom: 0.8rem; color: #444; font-size: 0.95rem; }
+.modal-body ul, .modal-body ol {
+  padding-left: 1.5rem; margin-bottom: 1rem;
+}
+.modal-body li { margin-bottom: 0.4rem; font-size: 0.93rem; color: #444; }
+.modal-body .tip-box {
+  background: linear-gradient(135deg, #fff9e6, #fff3cd);
+  border: 2px solid var(--sunshine); border-radius: 14px;
+  padding: 1rem 1.2rem; margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.modal-body .tip-box strong { color: var(--dark); }
+.modal-body .materials-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem; margin: 0.8rem 0 1.2rem;
+}
+.modal-body .material-chip {
+  background: var(--bg-cream); border: 2px solid var(--border, #e0e6ed);
+  border-radius: 10px; padding: 0.5rem 0.8rem; text-align: center;
+  font-size: 0.85rem; font-weight: 600;
+}
+.modal-body .steps-list { counter-reset: mstep; list-style: none; padding-left: 0; }
+.modal-body .steps-list li {
+  counter-increment: mstep; padding-left: 2.2rem; position: relative;
+  margin-bottom: 0.8rem;
+}
+.modal-body .steps-list li::before {
+  content: counter(mstep);
+  position: absolute; left: 0; top: 2px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--ocean); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 800;
+  font-family: 'Baloo 2', cursive;
+}
+
+.activity-item { cursor: pointer; }
+.activity-item:hover { transform: translateY(-3px); border-color: var(--ocean); }
+.activity-item::after {
+  content: '→'; position: absolute; right: 1rem; top: 50%;
+  transform: translateY(-50%); font-size: 1.2rem; color: #b2bec3;
+  transition: all 0.3s;
+}
+.activity-item { position: relative; padding-right: 2.5rem; }
+.activity-item:hover::after { color: var(--ocean); right: 0.7rem; }
+
 /* Scroll-reveal */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -519,6 +749,10 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
       <a href="#" data-page="contact" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="nav-auth-area">
+      <button class="nav-auth-btn login-btn" id="navLoginBtn" onclick="showPage('login')">Log In</button>
+      <button class="nav-auth-btn profile-btn" id="navProfileBtn" onclick="showPage('profile')" style="display:none;">👤 Profile</button>
     </div>
     <button class="hamburger" id="hamburger" onclick="toggleMobile()">
       <span></span><span></span><span></span>
@@ -736,27 +970,27 @@ img { max-width: 100%; display: block; }
     <div class="age-content">
       <h2 class="section-title reveal">Featured Activities</h2>
       <div class="activity-list">
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('t1')">
           <div class="a-emoji">🎨</div>
           <div><h4>Rainbow Finger Painting</h4><p>Mess-free finger painting with ziplock bags and paint.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('t2')">
           <div class="a-emoji">🎵</div>
           <div><h4>Sing-Along Saturdays</h4><p>Fun songs with hand motions to build coordination.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('t3')">
           <div class="a-emoji">🧩</div>
           <div><h4>Shape Sorting Games</h4><p>Printable shape sorters to practice colors and forms.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('t4')">
           <div class="a-emoji">🌿</div>
           <div><h4>Nature Walk Bingo</h4><p>Take the card outside and spot leaves, bugs, and clouds!</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('t5')">
           <div class="a-emoji">📖</div>
           <div><h4>Bedtime Story Corner</h4><p>Short, illustrated stories for winding down at night.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('t6')">
           <div class="a-emoji">🧁</div>
           <div><h4>Tiny Chef Kitchen</h4><p>No-bake snacks tiny hands can make with a little help.</p></div>
         </div>
@@ -795,27 +1029,27 @@ img { max-width: 100%; display: block; }
     <div class="age-content">
       <h2 class="section-title reveal">Featured Activities</h2>
       <div class="activity-list">
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('k1')">
           <div class="a-emoji">🔬</div>
           <div><h4>Kitchen Science Lab</h4><p>Experiments using stuff already in your kitchen.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('k2')">
           <div class="a-emoji">🚀</div>
           <div><h4>Build a Paper Rocket</h4><p>Design, fold, and launch — see whose goes highest!</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('k3')">
           <div class="a-emoji">🗺️</div>
           <div><h4>Treasure Map Creator</h4><p>Draw a pirate map of your backyard and hide treasures.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('k4')">
           <div class="a-emoji">🤖</div>
           <div><h4>Intro to Scratch Coding</h4><p>Make your first animation with drag-and-drop coding.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('k5')">
           <div class="a-emoji">🌋</div>
           <div><h4>Volcano Eruption</h4><p>The classic baking soda experiment, now with color!</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('k6')">
           <div class="a-emoji">📓</div>
           <div><h4>Adventure Journal</h4><p>A printable journal to log discoveries and drawings.</p></div>
         </div>
@@ -854,27 +1088,27 @@ img { max-width: 100%; display: block; }
     <div class="age-content">
       <h2 class="section-title reveal">Featured Activities</h2>
       <div class="activity-list">
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('n1')">
           <div class="a-emoji">💻</div>
           <div><h4>Build Your First Website</h4><p>HTML, CSS, and hosting — from zero to live in an hour.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('n2')">
           <div class="a-emoji">🎬</div>
           <div><h4>Short Film Challenge</h4><p>Write, shoot, and edit a 2-minute film with your phone.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('n3')">
           <div class="a-emoji">📝</div>
           <div><h4>Creative Writing Prompts</h4><p>Weekly prompts to spark your next story or poem.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('n4')">
           <div class="a-emoji">🎸</div>
           <div><h4>Learn an Instrument Online</h4><p>Free resources to start guitar, piano, or ukulele.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('n5')">
           <div class="a-emoji">💰</div>
           <div><h4>Money Skills 101</h4><p>Budgeting, saving, and understanding how money works.</p></div>
         </div>
-        <div class="activity-item reveal">
+        <div class="activity-item reveal" onclick="openActivity('n6')">
           <div class="a-emoji">🧘</div>
           <div><h4>Mindfulness & Journaling</h4><p>Simple practices for managing stress and staying grounded.</p></div>
         </div>
@@ -899,6 +1133,117 @@ img { max-width: 100%; display: block; }
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LOGIN / SIGNUP PAGE ============ -->
+<div class="page" id="page-login">
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-emoji">🔐</div>
+      <h1>Welcome to KidVerse!</h1>
+      <p class="auth-sub">Join the fun — log in or create an account</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Log In</button>
+        <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+      </div>
+
+      <div id="authError" class="auth-error"></div>
+      <div id="authSuccess" class="auth-success"></div>
+
+      <!-- LOGIN FORM -->
+      <div class="auth-form-section active" id="loginForm">
+        <div class="form-group">
+          <label>Email 📧</label>
+          <input type="email" id="loginEmail" placeholder="your.email@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password 🔑</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password">
+        </div>
+        <button class="auth-btn btn-primary" onclick="handleLogin()">Log In 🚀</button>
+        <div class="auth-switch">
+          Don't have an account? <a onclick="switchAuthTab('signup')">Sign up here!</a>
+        </div>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div class="auth-form-section" id="signupForm">
+        <div class="form-group">
+          <label>Your Name 🙋</label>
+          <input type="text" id="signupName" placeholder="What should we call you?">
+        </div>
+        <div class="form-group">
+          <label>Email 📧</label>
+          <input type="email" id="signupEmail" placeholder="your.email@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password 🔑</label>
+          <input type="password" id="signupPassword" placeholder="At least 6 characters">
+        </div>
+        <div class="form-group">
+          <label>I am a... 🎭</label>
+          <select id="signupRole">
+            <option value="">-- Pick one --</option>
+            <option value="kid">🧒 Kid (under 13)</option>
+            <option value="teen">🎧 Teen (13-17)</option>
+            <option value="parent">👨‍👩‍👧 Parent / Guardian</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Age Group Interest 🌟</label>
+          <select id="signupAgeGroup">
+            <option value="">-- What content interests you? --</option>
+            <option value="toddlers">🧸 Toddlers (2-5)</option>
+            <option value="kids">🚀 Kids (6-10)</option>
+            <option value="teens">🎧 Teens (11-17)</option>
+            <option value="all">🌈 All age groups</option>
+          </select>
+        </div>
+        <button class="auth-btn btn-signup" onclick="handleSignup()">Create Account 🎉</button>
+        <div class="auth-switch">
+          Already have an account? <a onclick="switchAuthTab('login')">Log in here!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROFILE PAGE ============ -->
+<div class="page" id="page-profile">
+  <div class="profile-wrapper">
+    <div class="profile-card">
+      <div class="profile-avatar" id="profileAvatar">👤</div>
+      <h2 id="profileName">Loading...</h2>
+      <span class="profile-role" id="profileRole">Member</span>
+      <p class="profile-email" id="profileEmail">loading@email.com</p>
+
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <div class="stat-num" id="statJoined">—</div>
+          <div class="stat-label">Member Since</div>
+        </div>
+        <div class="profile-stat">
+          <div class="stat-num" id="statGroup">—</div>
+          <div class="stat-label">Age Group</div>
+        </div>
+        <div class="profile-stat">
+          <div class="stat-num" id="statActivities">0</div>
+          <div class="stat-label">Activities Done</div>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn btn-ocean" onclick="showPage('home')" style="font-size:0.9rem; padding:0.6rem 1.5rem;">🏠 Explore</button>
+        <button class="btn btn-outline" onclick="handleLogout()" style="font-size:0.9rem; padding:0.6rem 1.5rem;">🚪 Log Out</button>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <h2 class="section-title">Your Age Group Content</h2>
+      <div class="age-cards" id="profileAgeCards" style="padding-top:1rem;"></div>
     </div>
   </div>
 </div>
@@ -953,6 +1298,15 @@ img { max-width: 100%; display: block; }
   </div>
 </div>
 
+<!-- ACTIVITY MODAL -->
+<div class="modal-overlay" id="activityModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-close"><button onclick="closeModal()">✕</button></div>
+    <div class="modal-banner" id="modalBanner">🎨</div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
@@ -980,22 +1334,790 @@ img { max-width: 100%; display: block; }
 </footer>
 
 <script>
+// ===== SUPABASE CONFIG =====
+// ⚠️ REPLACE these with your Supabase project credentials!
+// Get them from: https://supabase.com → Your Project → Settings → API
+const SUPABASE_URL = 'https://migrlbamyrbnpqyoeasl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZ3JsYmFteXJibnBxeW9lYXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MjY3NDksImV4cCI6MjA4ODUwMjc0OX0.-a1hSMJ4HUXLNNurCAhyKRT3AdlS6K1fL2O_Ia7-YN8';
+
+let supabase = null;
+let currentUser = null;
+
+// Initialize Supabase (only if configured)
+function initSupabase() {
+  // Dynamically load Supabase SDK
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  script.onload = function() {
+    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && typeof window.supabase !== 'undefined') {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      checkAuthState();
+    } else {
+      console.log('Supabase: using demo mode (not configured or SDK not loaded).');
+    }
+  };
+  script.onerror = function() {
+    console.log('Supabase SDK could not load. Auth features will run in demo mode.');
+  };
+  document.head.appendChild(script);
+}
+
+// ===== AUTH STATE MANAGEMENT =====
+async function checkAuthState() {
+  if (!supabase) return;
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      currentUser = session.user;
+      await loadUserProfile();
+      updateNavAuth(true);
+    } else {
+      currentUser = null;
+      updateNavAuth(false);
+    }
+    // Listen for auth changes
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        currentUser = session.user;
+        loadUserProfile();
+        updateNavAuth(true);
+      } else {
+        currentUser = null;
+        updateNavAuth(false);
+      }
+    });
+  } catch(e) { console.error('Auth check failed:', e); }
+}
+
+function updateNavAuth(loggedIn) {
+  const loginBtn = document.getElementById('navLoginBtn');
+  const profileBtn = document.getElementById('navProfileBtn');
+  if (loggedIn) {
+    loginBtn.style.display = 'none';
+    profileBtn.style.display = 'inline-block';
+  } else {
+    loginBtn.style.display = 'inline-block';
+    profileBtn.style.display = 'none';
+  }
+}
+
+// ===== LOGIN =====
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  hideAuthMessages();
+
+  if (!email || !password) {
+    showAuthError('Please fill in both email and password.');
+    return;
+  }
+
+  // Demo mode fallback
+  if (!supabase) {
+    showAuthError('⚠️ Supabase not configured yet. See the Setup Guide to connect your database!');
+    return;
+  }
+
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    currentUser = data.user;
+    await loadUserProfile();
+    updateNavAuth(true);
+    showPage('profile');
+  } catch (e) {
+    showAuthError(e.message || 'Login failed. Please check your credentials.');
+  }
+}
+
+// ===== SIGNUP =====
+async function handleSignup() {
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  const role = document.getElementById('signupRole').value;
+  const ageGroup = document.getElementById('signupAgeGroup').value;
+  hideAuthMessages();
+
+  if (!name || !email || !password || !role || !ageGroup) {
+    showAuthError('Please fill in all fields.');
+    return;
+  }
+  if (password.length < 6) {
+    showAuthError('Password must be at least 6 characters.');
+    return;
+  }
+
+  // Demo mode fallback
+  if (!supabase) {
+    showAuthError('⚠️ Supabase not configured yet. See the Setup Guide to connect your database!');
+    return;
+  }
+
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { display_name: name, role: role, age_group: ageGroup }
+      }
+    });
+    if (error) throw error;
+
+    // Save profile to profiles table
+    if (data.user) {
+      await supabase.from('profiles').upsert({
+        id: data.user.id,
+        display_name: name,
+        email: email,
+        role: role,
+        age_group: ageGroup,
+        activities_done: 0,
+        created_at: new Date().toISOString()
+      });
+    }
+
+    showAuthSuccess('🎉 Account created! Check your email to confirm, then log in.');
+    switchAuthTab('login');
+  } catch (e) {
+    showAuthError(e.message || 'Signup failed. Please try again.');
+  }
+}
+
+// ===== LOGOUT =====
+async function handleLogout() {
+  if (supabase) {
+    await supabase.auth.signOut();
+  }
+  currentUser = null;
+  updateNavAuth(false);
+  showPage('home');
+}
+
+// ===== LOAD USER PROFILE =====
+async function loadUserProfile() {
+  if (!currentUser) return;
+
+  let profile = null;
+
+  // Try to load from database
+  if (supabase) {
+    try {
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', currentUser.id)
+        .single();
+      if (data) profile = data;
+    } catch(e) { console.log('Profile load:', e); }
+  }
+
+  // Fallback to auth metadata
+  const meta = currentUser.user_metadata || {};
+  const displayName = profile?.display_name || meta.display_name || 'KidVerse Member';
+  const role = profile?.role || meta.role || 'member';
+  const ageGroup = profile?.age_group || meta.age_group || 'all';
+  const activitiesDone = profile?.activities_done || 0;
+  const createdAt = profile?.created_at || currentUser.created_at;
+
+  // Update profile page
+  document.getElementById('profileName').textContent = displayName;
+  document.getElementById('profileEmail').textContent = currentUser.email;
+
+  const roleEl = document.getElementById('profileRole');
+  const avatarEl = document.getElementById('profileAvatar');
+  if (role === 'parent') {
+    roleEl.textContent = '👨‍👩‍👧 Parent / Guardian';
+    roleEl.className = 'profile-role role-parent';
+    avatarEl.className = 'profile-avatar parent-avatar';
+    avatarEl.textContent = '👨‍👩‍👧';
+  } else if (role === 'teen') {
+    roleEl.textContent = '🎧 Teen';
+    roleEl.className = 'profile-role role-kid';
+    avatarEl.className = 'profile-avatar kid-avatar';
+    avatarEl.textContent = '🎧';
+  } else {
+    roleEl.textContent = '🧒 Kid';
+    roleEl.className = 'profile-role role-kid';
+    avatarEl.className = 'profile-avatar kid-avatar';
+    avatarEl.textContent = '🧒';
+  }
+
+  // Stats
+  const joinDate = new Date(createdAt);
+  document.getElementById('statJoined').textContent = joinDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
+  const groupLabels = { toddlers: '🧸 2-5', kids: '🚀 6-10', teens: '🎧 11-17', all: '🌈 All' };
+  document.getElementById('statGroup').textContent = groupLabels[ageGroup] || '🌈 All';
+  document.getElementById('statActivities').textContent = activitiesDone;
+
+  // Show recommended age group cards
+  renderProfileCards(ageGroup);
+}
+
+function renderProfileCards(ageGroup) {
+  const cards = {
+    toddlers: `<div class="age-card toddler" onclick="showPage('toddlers')" style="cursor:pointer">
+      <div class="emoji">🧸</div><h3>Toddlers (2-5)</h3>
+      <p>Your selected content area! Explore activities, stories, and games.</p>
+      <br><a class="btn btn-coral" style="font-size:0.9rem;padding:0.5rem 1.5rem;">Go Explore →</a></div>`,
+    kids: `<div class="age-card kids" onclick="showPage('kids')" style="cursor:pointer">
+      <div class="emoji">🚀</div><h3>Kids (6-10)</h3>
+      <p>Your selected content area! Science, crafts, and adventures await.</p>
+      <br><a class="btn btn-ocean" style="font-size:0.9rem;padding:0.5rem 1.5rem;">Go Explore →</a></div>`,
+    teens: `<div class="age-card teens" onclick="showPage('teens')" style="cursor:pointer">
+      <div class="emoji">🎧</div><h3>Teens (11-17)</h3>
+      <p>Your selected content area! Coding, creativity, and real-world skills.</p>
+      <br><a class="btn btn-grape" style="font-size:0.9rem;padding:0.5rem 1.5rem;">Go Explore →</a></div>`
+  };
+
+  const container = document.getElementById('profileAgeCards');
+  if (ageGroup === 'all') {
+    container.innerHTML = cards.toddlers + cards.kids + cards.teens;
+  } else {
+    container.innerHTML = cards[ageGroup] || cards.toddlers + cards.kids + cards.teens;
+  }
+}
+
+// ===== AUTH UI HELPERS =====
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t, i) => {
+    t.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'signup' && i === 1));
+  });
+  document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+  document.getElementById('signupForm').classList.toggle('active', tab === 'signup');
+  hideAuthMessages();
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg; el.style.display = 'block';
+  document.getElementById('authSuccess').style.display = 'none';
+}
+function showAuthSuccess(msg) {
+  const el = document.getElementById('authSuccess');
+  el.textContent = msg; el.style.display = 'block';
+  document.getElementById('authError').style.display = 'none';
+}
+function hideAuthMessages() {
+  document.getElementById('authError').style.display = 'none';
+  document.getElementById('authSuccess').style.display = 'none';
+}
+
+// ===== ACTIVITY CONTENT DATA =====
+const activities = {
+  // ===== TODDLERS (2-5) =====
+  t1: {
+    emoji: '🎨', group: 'toddler', tag: 'Creative Play', tagClass: 'tag-toddler',
+    title: 'Rainbow Finger Painting',
+    subtitle: 'Ages 2-5 · 20 minutes · No mess!',
+    content: `
+      <p>Who says finger painting has to be messy? This clever technique uses ziplock bags to create beautiful rainbow art without a single drop of paint on the floor, walls, or tiny fingers!</p>
+      <h3>🧰 What You'll Need</h3>
+      <div class="materials-grid">
+        <div class="material-chip">🛍️ Ziplock bags</div>
+        <div class="material-chip">🎨 Washable paint</div>
+        <div class="material-chip">📄 White card paper</div>
+        <div class="material-chip">🖇️ Tape</div>
+      </div>
+      <h3>📋 Step-by-Step</h3>
+      <ol class="steps-list">
+        <li>Place a sheet of white card paper inside a large ziplock bag.</li>
+        <li>Squeeze 3-4 dots of different colored washable paint onto the paper (red, yellow, blue, and green work great!).</li>
+        <li>Seal the bag tightly — squeeze out extra air first.</li>
+        <li>Tape the bag flat to a table or high-chair tray so it doesn't slide around.</li>
+        <li>Let your toddler press, squish, and drag their fingers across the bag. The colors mix and swirl behind the plastic!</li>
+        <li>When they're done, carefully open the bag and remove the paper art to dry.</li>
+      </ol>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Try this with glow-in-the-dark paint for a nighttime version! You can also freeze the finished bag flat for a cool sensory ice-painting activity later.</div>
+      <h3>🌟 What Kids Learn</h3>
+      <p>Color mixing and recognition, cause-and-effect thinking, fine motor skills, and sensory exploration — all while staying totally clean!</p>
+    `
+  },
+  t2: {
+    emoji: '🎵', group: 'toddler', tag: 'Music & Movement', tagClass: 'tag-toddler',
+    title: 'Sing-Along Saturdays',
+    subtitle: 'Ages 2-5 · 15 minutes · Get moving!',
+    content: `
+      <p>Music is one of the most powerful tools for toddler development. Sing-Along Saturdays is a weekly tradition where the whole family picks songs, learns hand motions, and dances together!</p>
+      <h3>🎶 This Week's Playlist</h3>
+      <ol class="steps-list">
+        <li><strong>"If You're Happy and You Know It"</strong> — Classic clapping, stomping, and shouting. Add silly variations like "wiggle your ears" or "spin around!"</li>
+        <li><strong>"Head, Shoulders, Knees & Toes"</strong> — Start slow, then speed up each round until everyone collapses in giggles.</li>
+        <li><strong>"The Wheels on the Bus"</strong> — Act out each verse with arm movements. Let your toddler suggest what else is on the bus!</li>
+        <li><strong>"Baby Shark"</strong> — The one they'll want to repeat 47 times. Embrace it.</li>
+        <li><strong>"Twinkle Twinkle Little Star"</strong> — Perfect wind-down song. Use a flashlight to make "stars" on the ceiling.</li>
+      </ol>
+      <h3>🙌 How to Make It Special</h3>
+      <p>Create a "stage" with a blanket on the floor. Give your toddler a wooden spoon microphone. Take turns being the lead singer. Record a video to watch later — toddlers love seeing themselves perform!</p>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Repetition is key at this age. Don't worry about playing the same songs every week — that's actually how toddlers learn best! They'll start anticipating the motions and words, which builds memory and confidence.</div>
+      <h3>🌟 What Kids Learn</h3>
+      <p>Rhythm and coordination, vocabulary building, body awareness, social bonding, following instructions, and pure joy!</p>
+    `
+  },
+  t3: {
+    emoji: '🧩', group: 'toddler', tag: 'Learning Games', tagClass: 'tag-toddler',
+    title: 'Shape Sorting Games',
+    subtitle: 'Ages 2-4 · 15 minutes · Hands-on learning',
+    content: `
+      <p>Shape sorting isn't just about fitting squares into square holes — it's one of the earliest forms of problem-solving your toddler will master! Here are 3 fun DIY shape activities.</p>
+      <h3>🧰 What You'll Need</h3>
+      <div class="materials-grid">
+        <div class="material-chip">📦 Cardboard box</div>
+        <div class="material-chip">✂️ Scissors (adult)</div>
+        <div class="material-chip">🖍️ Markers</div>
+        <div class="material-chip">🟡 Colored paper</div>
+      </div>
+      <h3>🎮 Activity 1: Cardboard Shape Sorter</h3>
+      <ol class="steps-list">
+        <li>Take a shoe box and trace circle, square, triangle, and star shapes on the lid.</li>
+        <li>Cut out the shapes carefully (adult job!).</li>
+        <li>Cut matching shapes from colored cardboard — make them slightly smaller so they drop through easily.</li>
+        <li>Let your toddler match and drop each shape through the correct hole!</li>
+      </ol>
+      <h3>🎮 Activity 2: Shape Hunt</h3>
+      <p>Walk around your house and find real objects that match each shape. Clocks are circles! Windows are rectangles! Pizza slices are triangles! Take photos and make a "shape book."</p>
+      <h3>🎮 Activity 3: Sorting Mat</h3>
+      <p>Draw large shapes on a big piece of paper. Give your toddler a pile of cut-out shapes and let them place each one on its matching outline.</p>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Start with just 2 shapes (circle and square) and add more as your toddler gets confident. Naming the shapes out loud each time helps with vocabulary.</div>
+    `
+  },
+  t4: {
+    emoji: '🌿', group: 'toddler', tag: 'Outdoor Fun', tagClass: 'tag-toddler',
+    title: 'Nature Walk Bingo',
+    subtitle: 'Ages 2-5 · 30 minutes · Outdoor adventure',
+    content: `
+      <p>Turn an ordinary walk into an exciting scavenger hunt! Nature Walk Bingo gets toddlers looking, pointing, and discovering the world around them.</p>
+      <h3>🃏 How to Play</h3>
+      <ol class="steps-list">
+        <li>Before your walk, create (or print) a simple bingo card with pictures instead of words: a leaf, a bird, a flower, a rock, a puddle, a dog, a cloud, a bug, a stick.</li>
+        <li>Give your toddler the card and a crayon or sticker sheet.</li>
+        <li>As you walk, help them spot each item. When they find one, they mark it off!</li>
+        <li>Celebrate each find with excitement — "You found a bird! Amazing eyes!"</li>
+        <li>Try to get a full row or complete the whole card!</li>
+      </ol>
+      <h3>🌦️ Seasonal Variations</h3>
+      <p><strong>Spring:</strong> Add butterflies, worms, and puddles. <strong>Summer:</strong> Add bees, dandelions, and shade. <strong>Autumn:</strong> Add colored leaves, acorns, and pinecones. <strong>Winter:</strong> Add frost, bare trees, and bird tracks.</p>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Bring a small bag so your toddler can collect safe treasures (leaves, stones, sticks). When you get home, glue them to paper for a nature collage!</div>
+      <h3>🌟 What Kids Learn</h3>
+      <p>Observation skills, nature vocabulary, color and pattern recognition, patience, and a love for the outdoors.</p>
+    `
+  },
+  t5: {
+    emoji: '📖', group: 'toddler', tag: 'Story Time', tagClass: 'tag-toddler',
+    title: 'Bedtime Story Corner',
+    subtitle: 'Ages 2-5 · 10 minutes · Wind-down time',
+    content: `
+      <p>Every night is a new adventure in the Bedtime Story Corner! These short, calming stories are designed to help little ones transition from playtime to sleepy time.</p>
+      <h3>📚 This Week's Story: "The Sleepy Cloud"</h3>
+      <p><em>Once upon a time, there was a little cloud named Puffy who floated above the rooftops every evening. Puffy's job was very important — when the sun went down, Puffy would gently cover the sky like a soft blanket.</em></p>
+      <p><em>"Time to rest," whispered the moon. Puffy yawned a big yawn and slowly turned pink, then purple, then a deep, cozy blue. One by one, the stars peeked through Puffy's soft edges, twinkling like tiny nightlights.</em></p>
+      <p><em>"Goodnight, birds," Puffy whispered. "Goodnight, trees. Goodnight, little one down below." And just like that, the world got quiet, warm, and still.</em></p>
+      <h3>🌙 After the Story</h3>
+      <p>Ask your toddler: "What do you think Puffy dreams about?" This gentle question encourages imagination without waking them up too much. Then do three slow, deep breaths together.</p>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Keep the same routine every night — same spot, same blanket, story, then lights dim. Consistency is the secret ingredient to easy bedtimes. Try reading in a slightly slower, softer voice than normal.</div>
+      <h3>📖 More Stories in This Series</h3>
+      <p>"The Star Who Lost Her Sparkle" · "Bear's Big Yawn" · "The Moon's Lullaby" · "Where Do Butterflies Sleep?" — New story every week!</p>
+    `
+  },
+  t6: {
+    emoji: '🧁', group: 'toddler', tag: 'Cooking Fun', tagClass: 'tag-toddler',
+    title: 'Tiny Chef Kitchen',
+    subtitle: 'Ages 3-5 · 20 minutes · Yummy & safe',
+    content: `
+      <p>Little hands, big flavors! These no-bake recipes are safe for toddlers to help make (with supervision) and even more fun to eat. No oven, no stove, no stress!</p>
+      <h3>🍌 Recipe 1: Banana Sushi Rolls</h3>
+      <div class="materials-grid">
+        <div class="material-chip">🍌 1 Banana</div>
+        <div class="material-chip">🥜 Nut butter</div>
+        <div class="material-chip">🥣 Crushed cereal</div>
+        <div class="material-chip">🍫 Mini choc chips</div>
+      </div>
+      <ol class="steps-list">
+        <li>Spread a thin layer of nut butter (or sunflower butter) all over a peeled banana.</li>
+        <li>Roll the banana in crushed cereal or sprinkles.</li>
+        <li>Slice into rounds — they look just like sushi!</li>
+        <li>Arrange on a plate and let your tiny chef admire their creation before eating.</li>
+      </ol>
+      <h3>🐜 Recipe 2: Ants on a Log</h3>
+      <p>Fill celery sticks with cream cheese or peanut butter, then place raisins on top. The raisins are the "ants!" Count them together as you place each one.</p>
+      <h3>🧊 Recipe 3: Frozen Yogurt Bites</h3>
+      <p>Drop spoonfuls of yogurt onto a parchment-lined tray. Let your toddler press a blueberry or banana slice into each drop. Freeze for 2 hours and enjoy frozen yogurt dots!</p>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Let toddlers do the spreading, sprinkling, and placing. It won't be perfect — and that's exactly the point! Cooking builds confidence, motor skills, and healthy eating habits.</div>
+    `
+  },
+
+  // ===== KIDS (6-10) =====
+  k1: {
+    emoji: '🔬', group: 'kids', tag: 'Science', tagClass: 'tag-kids',
+    title: 'Kitchen Science Lab',
+    subtitle: 'Ages 6-10 · 30 minutes · Mind-blowing experiments',
+    content: `
+      <p>Your kitchen is secretly a science laboratory! These 3 experiments use everyday ingredients to demonstrate real scientific principles. Put on your lab goggles (or swimming goggles — we won't judge)!</p>
+      <h3>🧪 Experiment 1: Magic Milk</h3>
+      <div class="materials-grid">
+        <div class="material-chip">🥛 Whole milk</div>
+        <div class="material-chip">🎨 Food coloring</div>
+        <div class="material-chip">🧴 Dish soap</div>
+        <div class="material-chip">🥄 Cotton swabs</div>
+      </div>
+      <ol class="steps-list">
+        <li>Pour whole milk into a shallow plate until it just covers the bottom.</li>
+        <li>Add 3-4 drops of different food coloring around the plate (don't mix!).</li>
+        <li>Dip a cotton swab in dish soap.</li>
+        <li>Touch the soapy swab to the center of the milk and WATCH THE MAGIC — colors will swirl and dance!</li>
+      </ol>
+      <p><strong>The Science:</strong> Dish soap breaks the surface tension of the milk and reacts with the fat molecules, creating currents that push the food coloring around!</p>
+      <h3>🧪 Experiment 2: Invisible Ink</h3>
+      <p>Squeeze lemon juice into a cup. Use a cotton swab to write a secret message on white paper. Let it dry completely (it becomes invisible!). To reveal the message, hold the paper near a warm lamp — the heat turns the lemon juice brown!</p>
+      <h3>🧪 Experiment 3: Dancing Raisins</h3>
+      <p>Fill a clear glass with sparkling water or soda. Drop in 5-6 raisins. Watch them sink, then slowly rise and "dance" as bubbles attach to them, lift them up, pop at the surface, and let them sink again!</p>
+      <div class="tip-box">💡 <strong>Science Notebook:</strong> Have your kid draw what happened and write one sentence about why. This builds the habit of scientific observation!</div>
+    `
+  },
+  k2: {
+    emoji: '🚀', group: 'kids', tag: 'Engineering', tagClass: 'tag-kids',
+    title: 'Build a Paper Rocket',
+    subtitle: 'Ages 6-10 · 25 minutes · Launch day!',
+    content: `
+      <p>3… 2… 1… LAUNCH! Design your own paper rocket and see how high it can fly. This is real engineering — you'll test, tweak, and improve your design just like NASA scientists!</p>
+      <h3>🧰 What You'll Need</h3>
+      <div class="materials-grid">
+        <div class="material-chip">📄 A4 paper</div>
+        <div class="material-chip">🖇️ Tape</div>
+        <div class="material-chip">✂️ Scissors</div>
+        <div class="material-chip">🥤 Straw</div>
+        <div class="material-chip">🖍️ Markers</div>
+        <div class="material-chip">📏 Ruler</div>
+      </div>
+      <h3>📋 Build Instructions</h3>
+      <ol class="steps-list">
+        <li>Cut a strip of paper about 3cm wide and 20cm long.</li>
+        <li>Wrap it tightly around a pencil to form a tube. Tape the edge so it holds its shape.</li>
+        <li>Slide the tube off the pencil. Pinch and fold one end closed, then tape it shut — this is your rocket's nose cone.</li>
+        <li>Cut out 3-4 small triangular fins from another piece of paper.</li>
+        <li>Tape the fins evenly around the bottom (open end) of your rocket.</li>
+        <li>Decorate your rocket with markers — give it a name!</li>
+        <li>Slide the rocket onto a straw (open end down) and BLOW to launch!</li>
+      </ol>
+      <h3>🏆 The Engineering Challenge</h3>
+      <p>Can you make your rocket fly further? Try these tweaks and measure each launch with a ruler or tape measure:</p>
+      <ul>
+        <li>Make the body tube longer or shorter</li>
+        <li>Try different fin shapes (curved, swept back, bigger, smaller)</li>
+        <li>Add a paper clip to the nose for weight</li>
+        <li>Change the angle you launch from</li>
+      </ul>
+      <div class="tip-box">💡 <strong>Challenge:</strong> Have a family rocket competition! Each person builds their own design and you measure whose goes the farthest. Record results in a chart!</div>
+    `
+  },
+  k3: {
+    emoji: '🗺️', group: 'kids', tag: 'Adventure', tagClass: 'tag-kids',
+    title: 'Treasure Map Creator',
+    subtitle: 'Ages 6-10 · 45 minutes · Pirate adventure',
+    content: `
+      <p>Ahoy, matey! Create an authentic-looking treasure map of your backyard (or your whole house), hide a real treasure, and challenge your friends and family to find it!</p>
+      <h3>🧰 What You'll Need</h3>
+      <div class="materials-grid">
+        <div class="material-chip">📄 White paper</div>
+        <div class="material-chip">☕ Tea bag or coffee</div>
+        <div class="material-chip">🖍️ Markers/crayons</div>
+        <div class="material-chip">🔥 Lighter (adult only)</div>
+        <div class="material-chip">🎁 Small treasure</div>
+      </div>
+      <h3>📋 Creating Your Map</h3>
+      <ol class="steps-list">
+        <li><strong>Age the paper:</strong> Dip your paper in cold tea or coffee for 2 minutes. Let it dry on a baking tray. This makes it look old and pirate-y!</li>
+        <li><strong>Burn the edges (adult only!):</strong> An adult can carefully singe the edges with a lighter for an ancient scroll look. Or tear edges by hand for a safer option.</li>
+        <li><strong>Draw your map:</strong> Walk around your yard/house and sketch landmarks — the big tree, the swing set, the garden, the fence. Use a bird's-eye view (looking down from above).</li>
+        <li><strong>Add pirate details:</strong> Draw a compass rose (N, S, E, W), dotted path lines, danger zones ("Beware of Dog!"), and a big red X where the treasure is hidden.</li>
+        <li><strong>Hide the treasure:</strong> Put small treats, coins, or a toy in a box and hide it at the X location.</li>
+        <li><strong>Write clues:</strong> Add 3-4 riddle clues on the map like "Start at the tall guardian (tree), walk 10 paces toward the setting sun (west)."</li>
+      </ol>
+      <div class="tip-box">💡 <strong>Level Up:</strong> Create a whole series of maps — each treasure location contains a clue to the next map! This can keep kids busy for an entire afternoon.</div>
+    `
+  },
+  k4: {
+    emoji: '🤖', group: 'kids', tag: 'Coding', tagClass: 'tag-kids',
+    title: 'Intro to Scratch Coding',
+    subtitle: 'Ages 7-10 · 30 minutes · Your first program!',
+    content: `
+      <p>Scratch is a free visual coding language made by MIT where you snap together colorful blocks to make animations, games, and stories. No typing needed — just drag, drop, and create!</p>
+      <h3>🚀 Getting Started</h3>
+      <ol class="steps-list">
+        <li>Go to <strong>scratch.mit.edu</strong> in any web browser (works on tablets too!).</li>
+        <li>Click <strong>"Create"</strong> to open the editor. You'll see the Scratch cat on a white stage.</li>
+        <li>On the left, you'll find colorful code blocks organized by category (Motion, Looks, Sound, Events, Control).</li>
+      </ol>
+      <h3>🎮 Your First Project: Dancing Cat</h3>
+      <ol class="steps-list">
+        <li>From <strong>Events</strong> (yellow), drag "When green flag clicked" to the coding area.</li>
+        <li>From <strong>Control</strong> (orange), attach a "forever" loop below it.</li>
+        <li>Inside the forever loop, add: <strong>Motion</strong> → "move 10 steps" and <strong>Motion</strong> → "if on edge, bounce".</li>
+        <li>Add <strong>Looks</strong> → "next costume" to make the cat's legs move.</li>
+        <li>Click the <strong>green flag</strong> — your cat walks and bounces across the screen!</li>
+      </ol>
+      <h3>🎨 Make It Your Own</h3>
+      <ul>
+        <li>Change the backdrop by clicking the stage and picking a new background</li>
+        <li>Add sound effects from the Sounds tab</li>
+        <li>Make the cat talk with "say Hello! for 2 seconds"</li>
+        <li>Add another character (sprite) and make them interact</li>
+      </ul>
+      <div class="tip-box">💡 <strong>Next Steps:</strong> Once they've got the basics, try the "Animate a Name" and "Make Music" tutorials built into Scratch. Kids can also remix other people's projects to learn new techniques!</div>
+    `
+  },
+  k5: {
+    emoji: '🌋', group: 'kids', tag: 'Science', tagClass: 'tag-kids',
+    title: 'Volcano Eruption',
+    subtitle: 'Ages 6-10 · 30 minutes · BOOM!',
+    content: `
+      <p>The baking soda volcano is a classic for a reason — it's dramatic, it's bubbly, and kids lose their minds every single time. This version adds color and a few upgrades!</p>
+      <h3>🧰 What You'll Need</h3>
+      <div class="materials-grid">
+        <div class="material-chip">🏔️ Plastic bottle</div>
+        <div class="material-chip">🧪 Baking soda</div>
+        <div class="material-chip">🍶 Vinegar</div>
+        <div class="material-chip">🎨 Food coloring</div>
+        <div class="material-chip">🧴 Dish soap</div>
+        <div class="material-chip">🏖️ Play-dough/clay</div>
+        <div class="material-chip">🗞️ Newspaper</div>
+        <div class="material-chip">🖍️ Paint (optional)</div>
+      </div>
+      <h3>📋 Build & Erupt!</h3>
+      <ol class="steps-list">
+        <li><strong>Build the volcano:</strong> Place the plastic bottle on a tray lined with newspaper. Mold play-dough or clay around the bottle to create a mountain shape. Leave the bottle opening clear at the top. Let it dry (or use it wet — it still works!).</li>
+        <li><strong>Optional — paint it:</strong> Paint the volcano brown and green. Add tiny paper trees. Make it look real!</li>
+        <li><strong>Load the eruption:</strong> Add 3 tablespoons of baking soda into the bottle. Add a squirt of dish soap. Add 5-6 drops of red and yellow food coloring.</li>
+        <li><strong>ERUPTION TIME:</strong> Pour about half a cup of vinegar into the bottle and step back! Watch the colorful lava foam and flow down the sides!</li>
+      </ol>
+      <p><strong>The Science:</strong> Baking soda (a base) reacts with vinegar (an acid) to produce carbon dioxide gas. The dish soap traps the gas in bubbles, creating the foamy "lava" effect!</p>
+      <div class="tip-box">💡 <strong>Experiment Further:</strong> Try warm vinegar vs. cold — which erupts more? What if you add more baking soda? Less soap? Keep a lab notebook and track your results!</div>
+    `
+  },
+  k6: {
+    emoji: '📓', group: 'kids', tag: 'Creativity', tagClass: 'tag-kids',
+    title: 'Adventure Journal',
+    subtitle: 'Ages 6-10 · Ongoing · Your exploration log',
+    content: `
+      <p>Every great explorer keeps a journal! An Adventure Journal is a personal notebook where kids record discoveries, draw observations, paste mementos, and track their curiosity.</p>
+      <h3>📔 Setting Up Your Journal</h3>
+      <ol class="steps-list">
+        <li>Get a blank notebook or staple together folded paper. Decorate the cover with your name and "TOP SECRET ADVENTURE LOG."</li>
+        <li>On the first page, create your "Explorer Profile" — draw yourself, list your favorite things to explore, and write your explorer motto.</li>
+        <li>Number each page and create a Table of Contents on page 2 so you can find entries later.</li>
+      </ol>
+      <h3>📝 What to Put In It</h3>
+      <ul>
+        <li><strong>Nature entries:</strong> Sketch a bug you found, press a leaf between the pages, or describe a cool cloud you saw</li>
+        <li><strong>Experiment logs:</strong> Record what you tried, what happened, and what surprised you</li>
+        <li><strong>Wondering questions:</strong> Write down things you're curious about ("Why is the sky blue?" "How do birds sleep?")</li>
+        <li><strong>Maps:</strong> Draw maps of your neighborhood, your backyard, or an imaginary land</li>
+        <li><strong>Lists:</strong> Top 5 coolest animals, best rocks in your collection, funniest things your sibling said</li>
+        <li><strong>Tickets and mementos:</strong> Tape in movie stubs, stickers, postcards, or wrappers from fun trips</li>
+      </ul>
+      <h3>📅 Weekly Prompts</h3>
+      <p>Every Monday, write about one new thing you learned last week. Every Friday, draw your "moment of the week." These small habits build into an amazing record of your life!</p>
+      <div class="tip-box">💡 <strong>Parent Tip:</strong> Resist the urge to correct spelling or make it "neat." The journal is theirs — messy, creative, and authentic. That's what makes it special.</div>
+    `
+  },
+
+  // ===== TEENS (11-17) =====
+  n1: {
+    emoji: '💻', group: 'teens', tag: 'Tech', tagClass: 'tag-teens',
+    title: 'Build Your First Website',
+    subtitle: 'Ages 11-17 · 60 minutes · Go live today!',
+    content: `
+      <p>You're about to join the ranks of people who can build things on the internet. By the end of this guide, you'll have a real, live website that anyone in the world can visit.</p>
+      <h3>🧰 What You'll Need</h3>
+      <div class="materials-grid">
+        <div class="material-chip">💻 A computer</div>
+        <div class="material-chip">🌐 Web browser</div>
+        <div class="material-chip">📝 Text editor</div>
+        <div class="material-chip">🔑 GitHub account</div>
+      </div>
+      <h3>📋 Part 1: Write Your First HTML Page</h3>
+      <ol class="steps-list">
+        <li>Open any text editor (Notepad, TextEdit, or VS Code for a pro experience).</li>
+        <li>Type the basic HTML skeleton: doctype, html, head, title, body tags.</li>
+        <li>Inside the body, add an <strong>h1</strong> tag with your name and a <strong>p</strong> tag introducing yourself.</li>
+        <li>Save the file as <strong>index.html</strong> and open it in your browser. You just made a web page!</li>
+      </ol>
+      <h3>🎨 Part 2: Make It Look Good with CSS</h3>
+      <p>Add a <strong>style</strong> tag in the head section. Change the font, background color, and text color. Try adding padding, margins, and border-radius to make things look polished. Google Fonts lets you use any font for free — just add the link tag!</p>
+      <h3>🚀 Part 3: Put It Online</h3>
+      <p>Create a free GitHub account, make a new repository, upload your index.html file, enable GitHub Pages in settings, and boom — your site is live at <strong>username.github.io</strong>!</p>
+      <div class="tip-box">💡 <strong>What's Next:</strong> Learn CSS Grid for layouts, add JavaScript for interactivity, and check out freeCodeCamp.org for free structured lessons. You're on your way to becoming a developer!</div>
+    `
+  },
+  n2: {
+    emoji: '🎬', group: 'teens', tag: 'Creative', tagClass: 'tag-teens',
+    title: 'Short Film Challenge',
+    subtitle: 'Ages 12-17 · 2-3 hours · Lights, camera, action!',
+    content: `
+      <p>You have a phone? You have a film studio. This challenge walks you through writing, filming, and editing a 2-minute short film using only your phone and free apps.</p>
+      <h3>📝 Phase 1: Write Your Script (30 min)</h3>
+      <ol class="steps-list">
+        <li>Pick a genre: comedy, horror, drama, documentary, or mystery.</li>
+        <li>Write a simple story with a beginning, middle, and twist ending. Keep it to one location if possible.</li>
+        <li>Keep dialogue short and punchy. Action and visuals tell the story better than long speeches.</li>
+        <li>Create a simple shot list: write down each scene and what type of shot you want (close-up, wide, over-the-shoulder).</li>
+      </ol>
+      <h3>🎥 Phase 2: Film It (60 min)</h3>
+      <ul>
+        <li><strong>Lighting:</strong> Film during golden hour (sunset) for cinematic vibes, or use a desk lamp for dramatic indoor lighting</li>
+        <li><strong>Stability:</strong> Prop your phone against books, use a cheap tripod, or lean against a wall</li>
+        <li><strong>Audio:</strong> Film in quiet spaces. Get your phone close to the speaker for clearer sound</li>
+        <li><strong>The Rule of Thirds:</strong> Don't center everything — place subjects slightly off-center for a more cinematic look</li>
+      </ul>
+      <h3>✂️ Phase 3: Edit (60 min)</h3>
+      <p>Use free apps like CapCut, iMovie, or DaVinci Resolve. Cut out mistakes, add background music (use royalty-free music from YouTube Audio Library), and add a title card at the beginning.</p>
+      <div class="tip-box">💡 <strong>Pro Tips:</strong> The best short films have a clear emotion. Make people laugh, gasp, or think — pick ONE feeling and commit to it. Also: sound design matters more than visuals. Good audio = professional feel.</div>
+    `
+  },
+  n3: {
+    emoji: '📝', group: 'teens', tag: 'Writing', tagClass: 'tag-teens',
+    title: 'Creative Writing Prompts',
+    subtitle: 'Ages 11-17 · 20 minutes · Spark your imagination',
+    content: `
+      <p>Writer's block? Gone. These prompts are designed to get words flowing in 60 seconds flat. Pick one, set a timer for 20 minutes, and write without stopping. Don't edit — just create.</p>
+      <h3>✍️ This Week's Prompts</h3>
+      <ol class="steps-list">
+        <li><strong>"The Last Notification"</strong> — Your phone buzzes with a message from someone who doesn't exist yet. It reads: "Don't go to school tomorrow. Trust me." What do you do?</li>
+        <li><strong>"Rewind"</strong> — You discover you can rewind the last 30 seconds of your life, but every time you do, you lose one memory. How do you decide when it's worth it?</li>
+        <li><strong>"The Other Side"</strong> — Write a story from the perspective of a villain who genuinely believes they're the hero.</li>
+        <li><strong>"Found"</strong> — You find a journal buried in your backyard. The handwriting inside is yours, but you never wrote it. The last entry is dated next week.</li>
+        <li><strong>"Six Words"</strong> — Tell a complete story in exactly six words. (Hemingway famously wrote: "For sale: baby shoes, never worn.") Write 5 of your own.</li>
+      </ol>
+      <h3>📚 Writing Tips</h3>
+      <ul>
+        <li><strong>Start in the middle:</strong> Skip the setup. Drop readers into the action and fill in context later.</li>
+        <li><strong>Use all five senses:</strong> Don't just describe what things look like — include sounds, smells, textures, and tastes.</li>
+        <li><strong>Dialogue reveals character:</strong> How someone talks tells us who they are. A nervous person uses short sentences. A confident person asks questions.</li>
+        <li><strong>End with a surprise:</strong> The best endings reframe everything that came before.</li>
+      </ul>
+      <div class="tip-box">💡 <strong>Challenge:</strong> Write every day for 7 days using a different prompt. By the end of the week, you'll have a mini collection of stories. Pick your favorite and polish it!</div>
+    `
+  },
+  n4: {
+    emoji: '🎸', group: 'teens', tag: 'Music', tagClass: 'tag-teens',
+    title: 'Learn an Instrument Online',
+    subtitle: 'Ages 11-17 · Ongoing · Free resources inside',
+    content: `
+      <p>Learning an instrument is one of the most rewarding things you can do as a teen. Here's how to get started with three popular instruments — using completely free resources.</p>
+      <h3>🎸 Guitar</h3>
+      <p><strong>Best free resource:</strong> Justin Guitar (justinguitar.com) — over 1,000 free lessons from absolute beginner to advanced. Start with the "Beginner Course" and learn your first 3 chords (A, D, E) in the first lesson.</p>
+      <p><strong>First song to learn:</strong> "Wonderwall" (just 4 chords!) or "Horse With No Name" (just 2 chords!).</p>
+      <h3>🎹 Piano/Keyboard</h3>
+      <p><strong>Best free resource:</strong> Pianote on YouTube or Simply Piano app (free version). Start by learning where Middle C is and playing simple melodies with one hand.</p>
+      <p><strong>First song to learn:</strong> "Für Elise" opening — it sounds impressive but is surprisingly simple!</p>
+      <h3>🪕 Ukulele</h3>
+      <p><strong>Best free resource:</strong> The Ukulele Teacher on YouTube. The uke is arguably the easiest string instrument to start with — you can play full songs within your first week!</p>
+      <p><strong>First song to learn:</strong> "Riptide" by Vance Joy — just 4 easy chords.</p>
+      <h3>📅 Practice Schedule</h3>
+      <p>You don't need hours. Just 15 minutes a day, every day, is better than a 2-hour session once a week. Set a daily reminder and stick with it for 30 days — by then, it'll be a habit and you'll be shocked at your progress.</p>
+      <div class="tip-box">💡 <strong>Motivation Hack:</strong> Record yourself on Day 1, then again on Day 30. The difference will blow your mind and keep you going when practice feels hard.</div>
+    `
+  },
+  n5: {
+    emoji: '💰', group: 'teens', tag: 'Life Skills', tagClass: 'tag-teens',
+    title: 'Money Skills 101',
+    subtitle: 'Ages 13-17 · 20 min read · Real-world knowledge',
+    content: `
+      <p>School teaches you algebra but not how money actually works. This guide covers the fundamentals every teen should know before they start earning, spending, and saving.</p>
+      <h3>💵 The 50/30/20 Rule</h3>
+      <p>When you earn money (allowance, job, gifts), split it into three buckets:</p>
+      <ul>
+        <li><strong>50% — Needs:</strong> Things you must pay for (phone plan, transport, school supplies)</li>
+        <li><strong>30% — Wants:</strong> Fun stuff (games, food out, clothes, concerts)</li>
+        <li><strong>20% — Savings:</strong> Future you will thank present you. Always pay yourself first.</li>
+      </ul>
+      <h3>🏦 Start a Savings Habit</h3>
+      <p>Open a savings account (most banks let teens open one with a parent). Set up automatic transfers — even $5/week adds up to $260/year. That's a new gaming console or a flight ticket!</p>
+      <h3>📊 Track Your Money</h3>
+      <p>Use a simple spreadsheet or a free app. Write down everything you spend for one month. Most people are shocked at where their money actually goes. Awareness is the first step to control.</p>
+      <h3>🚫 Avoid These Traps</h3>
+      <ul>
+        <li><strong>Impulse buying:</strong> Wait 24 hours before any purchase over $20. If you still want it tomorrow, go for it.</li>
+        <li><strong>Subscriptions:</strong> Those $4.99/month apps add up fast. Audit your subscriptions every 3 months.</li>
+        <li><strong>Keeping up:</strong> Your friends' spending habits are not your budget. Comparison is the thief of savings.</li>
+      </ul>
+      <div class="tip-box">💡 <strong>Power of Compound Interest:</strong> If you save $50/month starting at age 15 and invest it (average 7% return), you'll have over $175,000 by age 50 — and you only put in $21,000 of your own money. Time is your biggest financial superpower!</div>
+    `
+  },
+  n6: {
+    emoji: '🧘', group: 'teens', tag: 'Wellness', tagClass: 'tag-teens',
+    title: 'Mindfulness & Journaling',
+    subtitle: 'Ages 11-17 · 10 minutes daily · Find your calm',
+    content: `
+      <p>Being a teen is intense. School pressure, social media, friendships, identity — it's a lot. Mindfulness and journaling are two simple tools that can help you process everything and feel more grounded.</p>
+      <h3>🧘 5-Minute Mindfulness Exercise</h3>
+      <p>Try this right now — it works anywhere, even at your desk:</p>
+      <ol class="steps-list">
+        <li><strong>5 things you can SEE:</strong> Look around and name them silently.</li>
+        <li><strong>4 things you can TOUCH:</strong> Feel the texture of your desk, your hoodie, the chair.</li>
+        <li><strong>3 things you can HEAR:</strong> Traffic, a clock, your own breathing.</li>
+        <li><strong>2 things you can SMELL:</strong> Maybe nothing strong — that's fine. Notice the absence.</li>
+        <li><strong>1 thing you can TASTE:</strong> The last thing you drank, or just the inside of your mouth.</li>
+      </ol>
+      <p>This is called the 5-4-3-2-1 grounding technique. It pulls your attention out of anxious thoughts and back into the present moment.</p>
+      <h3>📓 Journaling Prompts for Teens</h3>
+      <ul>
+        <li>"What's taking up the most mental space right now?"</li>
+        <li>"What would I do today if I wasn't afraid of being judged?"</li>
+        <li>"Write a letter to your future self, 5 years from now."</li>
+        <li>"What's one thing that went well today, no matter how small?"</li>
+        <li>"If my stress had a color and shape, what would it look like?"</li>
+      </ul>
+      <h3>📅 Building the Habit</h3>
+      <p>Start with just 5 minutes before bed. Don't force it to be deep or meaningful every time — sometimes you'll write about your day, sometimes about big feelings. Both are valid. Consistency matters more than perfection.</p>
+      <div class="tip-box">💡 <strong>Important:</strong> Mindfulness isn't about "clearing your mind" — that's a myth. It's about noticing your thoughts without getting swept away by them. Thoughts will come. Let them float by like clouds.</div>
+    `
+  }
+};
+
+// ===== OPEN ACTIVITY MODAL =====
+function openActivity(id) {
+  const a = activities[id];
+  if (!a) return;
+
+  const bgClass = a.group === 'toddler' ? 'toddler-bg' : a.group === 'kids' ? 'kids-bg' : 'teens-bg';
+  const banner = document.getElementById('modalBanner');
+  banner.className = 'modal-banner ' + bgClass;
+  banner.textContent = a.emoji;
+
+  document.getElementById('modalBody').innerHTML = `
+    <span class="modal-tag ${a.tagClass}">${a.tag}</span>
+    <h2>${a.title}</h2>
+    <p class="modal-subtitle">${a.subtitle}</p>
+    ${a.content}
+  `;
+
+  document.getElementById('activityModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ===== CLOSE MODAL =====
+function closeModal() {
+  document.getElementById('activityModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
 // ===== PAGE NAVIGATION =====
 function showPage(pageName) {
-  // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  // Show target
   const target = document.getElementById('page-' + pageName);
   if (target) target.classList.add('active');
-  // Update nav active state
   document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
     a.classList.toggle('active', a.getAttribute('data-page') === pageName);
   });
-  // Close mobile menu
   document.getElementById('navLinks').classList.remove('open');
-  // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Re-trigger reveal animations
   setTimeout(initReveal, 100);
 }
 
@@ -1026,7 +2148,10 @@ function initReveal() {
 }
 
 // Init on load
-document.addEventListener('DOMContentLoaded', initReveal);
+document.addEventListener('DOMContentLoaded', () => {
+  initReveal();
+  initSupabase();
+});
 </script>
 </body>
 </html>
